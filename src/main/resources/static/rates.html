@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FX App — Rates</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand"><span class="fx">FX</span> App</span>
+    <nav class="menu">
+      <a href="/">Welcome</a>
+      <a href="/currencies.html">Currencies</a>
+      <a href="/rates.html" class="active">Rates</a>
+      <a href="/convert.html">Convert</a>
+      <a href="#" class="todo">History</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Latest rates</h1>
+    <p class="lede">
+      Every currency pair's most recent rate — <span class="mono">GET /api/rates</span>. Look up a
+      single pair below via <span class="mono">GET /api/rates/{base}/{quote}</span>.
+    </p>
+
+    <div class="panel">
+      <table>
+        <thead>
+          <tr><th>Base</th><th>Quote</th><th>Rate</th><th>Date</th></tr>
+        </thead>
+        <tbody id="rows">
+          <tr><td colspan="4" class="status">Loading…</td></tr>
+        </tbody>
+      </table>
+      <p id="status" class="status"></p>
+    </div>
+
+    <div class="panel">
+      <h2>Look up a pair</h2>
+      <form id="lookup-form" autocomplete="off">
+        <input name="base" maxlength="3" placeholder="Base (e.g. EUR)" required style="text-transform:uppercase">
+        <input name="quote" maxlength="3" placeholder="Quote (e.g. USD)" required style="text-transform:uppercase">
+        <button type="submit">Look up</button>
+      </form>
+      <p id="lookup-status" class="status"></p>
+    </div>
+  </main>
+
+  <script src="/js/rates.js"></script>
+</body>
+</html>

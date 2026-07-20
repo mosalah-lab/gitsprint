@@ -28,4 +28,10 @@ public class ApiExceptionHandler {
     public Map<String, String> badRequest(IllegalArgumentException ex) {
         return Map.of("error", ex.getMessage() == null ? "bad request" : ex.getMessage());
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> notFound(NotFoundException ex) {
+        return Map.of("error", ex.getMessage() == null ? "not found" : ex.getMessage());
+    }
 }
