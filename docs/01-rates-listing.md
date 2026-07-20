@@ -22,3 +22,4 @@ a happy path asserting EUR/USD = 1.0818, **and** the empty-DB case → `[]`.
 
 **Done** (README §6). AC-verified on the branch, `./mvnw test` green, a teammate re-verified and
 approved the PR, merged to `main`, and `main` is still green on a fresh clone.
+
