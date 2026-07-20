@@ -1,5 +1,5 @@
 # FX App — GenAI Team Sprint
-
+# Test Branch by Stella 
 A **running full-stack skeleton** (MySQL + Spring Boot + HTML/CSS/JS). Your team grows it into
 a working currency-exchange app this afternoon by shipping features — using AI to go fast, and
 **git to stay in sync**. The whole point: *how far can a team get in one afternoon, with every
