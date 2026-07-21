@@ -82,6 +82,9 @@ tbody tr:hover { background: var(--panel-2); }
 .status { font-size: .9rem; color: var(--muted); margin-top: .5rem; }
 .status.err { color: #ff8a8a; }
 
+.about-list { margin: 0; padding-left: 1.2rem; color: var(--muted); }
+.about-list li { margin: .3rem 0; }
+
 code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--panel-2); padding: .1rem .35rem; border-radius: 5px; font-size: .9em; }
 a.link { color: var(--accent-2); }
 .footer-note { color: var(--muted); font-size: .85rem; margin-top: 2.5rem; }
