@@ -3,33 +3,54 @@
 // Copy this file as the template for your feature pages (rates.js, convert.js, ...).
 
 // --- READ: GET /api/currencies and render the table ---
+let allCurrencies = [];
+
 async function loadCurrencies() {
   const rows = document.getElementById('rows');
   const status = document.getElementById('status');
   try {
     const res = await fetch('/api/currencies');
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const currencies = await res.json();
-
-    if (currencies.length === 0) {
-      rows.innerHTML = '<tr><td colspan="3" class="status">No currencies found.</td></tr>';
-      return;
-    }
-
-    rows.innerHTML = currencies.map(c => `
-      <tr>
-        <td class="mono">${c.code}</td>
-        <td>${c.name}</td>
-        <td class="sym">${c.symbol ?? ''}</td>
-      </tr>`).join('');
-    status.textContent = `${currencies.length} currencies loaded from the database.`;
+    allCurrencies = await res.json();
+    status.textContent = `${allCurrencies.length} currencies loaded from the database.`;
     status.classList.remove('err');
+    renderCurrencies(allCurrencies);
   } catch (err) {
     rows.innerHTML = '<tr><td colspan="3" class="status err">Could not load currencies.</td></tr>';
     status.textContent = 'Is the app running and the database seeded? Try /api/health/db. (' + err.message + ')';
     status.classList.add('err');
   }
 }
+
+// --- Client-side render: given a (possibly filtered) list, draw the rows ---
+function renderCurrencies(currencies) {
+  const rows = document.getElementById('rows');
+  if (currencies.length === 0) {
+    rows.innerHTML = '<tr><td colspan="3" class="status">No currencies match your filter.</td></tr>';
+    return;
+  }
+  rows.innerHTML = currencies.map(c => `
+    <tr>
+      <td class="mono">${c.code}</td>
+      <td>${c.name}</td>
+      <td class="sym">${c.symbol ?? ''}</td>
+    </tr>`).join('');
+}
+
+// --- Client-side filter: no request, filters the already-loaded list ---
+function filterCurrencies() {
+  const q = document.getElementById('filter').value.trim().toLowerCase();
+  if (!q) {
+    renderCurrencies(allCurrencies);
+    return;
+  }
+  const filtered = allCurrencies.filter(c =>
+    c.code.toLowerCase().includes(q) ||
+    c.name.toLowerCase().includes(q) ||
+    (c.symbol ?? '').toLowerCase().includes(q));
+  renderCurrencies(filtered);
+}
+
 
 // --- WRITE: POST /api/currencies with a JSON body, then re-read the list ---
 async function addCurrency(event) {
@@ -63,3 +84,4 @@ async function addCurrency(event) {
 
 loadCurrencies();
 document.getElementById('add-form').addEventListener('submit', addCurrency);
+document.getElementById('filter').addEventListener('input', filterCurrencies);

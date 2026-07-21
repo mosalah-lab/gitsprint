@@ -79,6 +79,8 @@ th { color: var(--muted); font-weight: 600; font-size: .82rem; text-transform: u
 tbody tr:hover { background: var(--panel-2); }
 .sym { color: var(--accent); font-weight: 600; }
 
+#filter { width: 100%; margin-bottom: .3rem; }
+
 .status { font-size: .9rem; color: var(--muted); margin-top: .5rem; }
 .status.err { color: #ff8a8a; }
 
