@@ -16,7 +16,7 @@ import java.util.Map;
 @RestController
 public class DbHealthController {
 
-    private static final List<String> TABLES = List.of("currency", "account", "fx_rate", "transfer");
+    private static final List<String> TABLES = List.of("currency", "account", "fx_rate", "transfer", "currency_pair");
 
     private final JdbcTemplate jdbc;
 
